@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <title>Edgar Allan Poe - Έργα - Ποιήματα</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/template.css">
+</head>
+
+<body>
+    <script type="module">
+        function getPoetry() {
+            fetch("/api/poetry", { method: "GET" })
+                .then((res) => res.json())
+                .then((json) => showPoetry((json)))
+                .catch((err) => console.error("error:", err));
+        }
+        function getFormData() {
+            let aPoetry = {
+                title: document.querySelector("#poetryForm [name='title']").value,
+                date: document.querySelector("#poetryForm [name='date']").value,
+            };
+            return JSON.stringify(aPoetry);
+        }
+        function addPoetry() {
+            let bodyData = getFormData();
+            fetch("/api/poetry", {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: bodyData
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    alert(json);
+                    getPoetry();
+                })
+                .catch((err) => alert("error:", err));
+        }
+
+        function updatePoetry() {
+            let bodyData = getFormData();
+            fetch("/api/poetry/"+bodyData.title, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "PUT",
+                body: bodyData
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    alert(json);
+                    getPoetry();
+                })
+                .catch((err) => alert("error:", err));
+        }
+
+
+        function deletePoetry() {
+            let bodyData = getFormData();
+            fetch("/api/poetry/"+bodyData.title, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "DELETE",
+                body: bodyData
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    alert(json);
+                    getPoetry();
+                })
+                .catch((err) => alert("error:", err));
+        }
+
+        function selectPoetry(event) {
+            if (!event.target.outerHTML.startsWith("<td>")) return;
+            let aRow = event.target.parentNode;
+            let inputs=document.querySelectorAll("#poetryForm input");
+            for (let i=0; i < inputs.length; i++){
+                inputs[i].value = aRow.children[i].innerText;
+            } 
+            let rows = [...aRow.parentNode.children];
+            rows.forEach((r => r.classList.remove("selected")));
+            aRow.classList.add("selected");            
+        }
+        function showPoetry(poetry) {
+            let anHTML = `<table><tr><th>Id</th>
+                <th>Name</th><th>date</th><th>Age</th></tr>`
+            for (let aPoetry of poetry) {
+                anHTML += `<tr>
+                    <td>${aPoetry.title}</td>
+                    <td>${aPoetry.date}</td>
+                    </tr>`;
+            }
+            anHTML += "</table>";
+            document.getElementById("poetryTable").innerHTML = anHTML;
+        }
+        getPoetry();
+        document.getElementById("poetryTable").addEventListener("click", selectPoetry);
+        document.getElementById("ButtonGetPoetry").addEventListener("click", getPoetry);
+        document.getElementById("ButtonAddPoetry").addEventListener("click", addPoetry);
+        document.getElementById("ButtonUpdatePoetry").addEventListener("click", updatePoetry);
+        document.getElementById("ButtonDeletePoetry").addEventListener("click", deletePoetry);
+    </script>
+    <script src="/js/main.js"></script>
+    <div class="grid">
+        <header><h1 class="text-center"><a href="/">Edgar Allan Poe</a></h1></header>
+        <nav>
+            <ul class="menu">
+                <li><a onclick="showBio();">Βιογραφία</a></li>
+                <li><a onclick="showPhotos();">Φωτογραφίες</a></li>
+                <li><a onclick="showWorks();">Έργα</a></li>
+                <li><a onclick="showLinks();">Σύνδεσμοι</a></li>
+                <li><a onclick="showAdmin();">Διαχείριση</a></li>
+            </ul>
+        </nav>
+        <aside>
+            <div id="bio" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li><a href="bio.html#early_life">Early life</a></li>
+                    <li><a href="bio.html#military">Military career</a></li>
+                    <li><a href="bio.html#publishing">Publishing career</a></li>
+                    <li><a href="bio.html#death">Death</a></li>
+                </ul>
+            </div>
+            <div id="photos" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li><a href="#home">Αρχή 2</a></li>
+                    <li><a href="#about">Σχετικά 2</a></li>
+                    <li><a href="#projects">Εφαρμογές 2</a></li>
+                    <li><a href="#contact">Επικοινωνία 2</a></li>
+                </ul>
+            </div>
+            <div id="works" class="sideDiv">
+                 <ul class="sidemenu">
+                    <li><a href="poems.html">Ποιήματα</a></li>
+                    <li><a href="tales.html">Ιστορίες</a></li>
+                </ul>
+            </div>
+            <div id="links" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li><a href="main_links.html">Links</a></li>
+                </ul>
+            </div>
+            <div id="admin" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li class="" id="login"><a href="login_form.html">Login</a></li>
+                    <li class="hidden" id="logout"><a href="login_form.html">Logout</a></li>
+                    <li class="hidden" id="edit1"><a href="login_form.html">Edit 1</a></li>
+                    <li class="hidden" id="edit2"><a href="login_form.html">Edit 2</a></li>
+                </ul>
+            </div>
+        </aside>
+        <main class="padding">
+            <h1>Poetry Form</h1>
+            <div id="poetryTable"></div>
+            <div id="poetryForm">
+                <label for="title">Title</label>
+                <input name="title" type="text" />
+                <label for="date">Date</label>
+                <input name="date" type="text" />
+            </div>
+            <div id="toolbar">
+                <button id="ButtonGetPoetry">Get Poetry</button>
+                <button id="ButtonAddPoetry">Add Poetry</button>
+                <button id="ButtonUpdatePoetry">Update Poetry</button>
+                <button id="ButtonDeletePoetry">Delete Poetry</button>
+            </div>
+        </main>
+        <footer class="text-center">All rights Reserved 2023</footer>
+    </div>
+<script type="text/javascript">
+var myCookie = getCookie("username");
+if (myCookie != null) {
+    const loginDiv = document.querySelector("#login");
+    loginDiv.classList.add("hidden");
+    const logoutDiv = document.querySelector("#logout");
+    logoutDiv.classList.remove("hidden");
+    const edit1Div = document.querySelector("#edit1");
+    edit1Div.classList.remove("hidden");
+    const edit2Div = document.querySelector("#edit2");
+    edit2Div.classList.remove("hidden");
+}
+</script>
+</body>
+</html>
