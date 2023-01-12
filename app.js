@@ -30,6 +30,7 @@ const isAuthenticated = (req, res, next) => {
     next();
 }
 app.get("/logout.html",(req, res) => {
+    console.log(res);
     if (!req.cookies.username){
         res.status(401);
         res.send('Access Forbidden');
