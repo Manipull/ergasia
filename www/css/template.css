@@ -242,3 +242,15 @@ th, td {
 #toolbar * {
     margin: 5px;
 }
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 30px;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.flex > * {
+    max-height: 500px;
+}

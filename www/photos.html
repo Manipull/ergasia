@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <title>Edgar Allan Poe - Έργα - Ιστορίες</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/template.css">
+</head>
+
+<body>
+    <script src="/js/main.js"></script>
+    <div class="grid">
+        <header><h1 class="text-center"><a href="/">Edgar Allan Poe</a></h1></header>
+        <nav>
+            <ul class="menu">
+                <li><a onclick="showBio();">Βιογραφία</a></li>
+                <li><a onclick="showPhotos();">Φωτογραφίες</a></li>
+                <li><a onclick="showWorks();">Έργα</a></li>
+                <li><a onclick="showLinks();">Σύνδεσμοι</a></li>
+                <li><a onclick="showAdmin();">Διαχείριση</a></li>
+            </ul>
+        </nav>
+        <aside>
+            <div id="bio" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li><a href="bio.html#early_life">Early life</a></li>
+                    <li><a href="bio.html#military">Military career</a></li>
+                    <li><a href="bio.html#publishing">Publishing career</a></li>
+                    <li><a href="bio.html#death">Death</a></li>
+                </ul>
+            </div>
+            <div id="photos" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li><a href="#home">Αρχή 2</a></li>
+                    <li><a href="#about">Σχετικά 2</a></li>
+                    <li><a href="#projects">Εφαρμογές 2</a></li>
+                    <li><a href="#contact">Επικοινωνία 2</a></li>
+                </ul>
+            </div>
+            <div id="works" class="sideDiv">
+                 <ul class="sidemenu">
+                    <li><a href="poems.html">Ποιήματα</a></li>
+                    <li><a href="tales.html">Ιστορίες</a></li>
+                </ul>
+            </div>
+            <div id="links" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li><a href="main_links.html">Links</a></li>
+                </ul>
+            </div>
+            <div id="admin" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li class="" id="login"><a href="login_form.html">Login</a></li>
+                    <li class="hidden" id="logout"><a href="logout.html">Logout</a></li>
+                    <li class="hidden" id="edit1"><a href="edit_poems.html">Επεξεργασία Ποιημάτων</a></li>
+                    <li class="hidden" id="edit2"><a href="edit_tales.html">Επεξεργασία Ιστοριών</a></li>
+                </ul>
+            </div>
+        </aside>
+        <main class="padding">
+            <div class="flex">
+                <div><img src="https://via.placeholder.com/500x700"/></div>
+                <div><img src="https://via.placeholder.com/800x700"/></div>
+                <div><img src="https://via.placeholder.com/500x800"/></div>
+                <div><img src="https://via.placeholder.com/900x700"/></div>
+                <div><img src="https://via.placeholder.com/500x1000"/></div>
+                <div><img src="https://via.placeholder.com/500x1700"/></div>
+                <div><img src="https://via.placeholder.com/1500x700"/></div>
+                <div><img src="https://via.placeholder.com/500x700"/></div>
+                <div><img src="https://via.placeholder.com/520x700"/></div>
+                <div><img src="https://via.placeholder.com/900x700"/></div>
+                <div><img src="https://via.placeholder.com/500x700"/></div>
+            </div>
+        </main>
+        <footer class="text-center">All rights Reserved 2023</footer>
+    </div>
+<script type="text/javascript">
+var myCookie = getCookie("username");
+if (myCookie != null) {
+    const loginDiv = document.querySelector("#login");
+    loginDiv.classList.add("hidden");
+    const logoutDiv = document.querySelector("#logout");
+    logoutDiv.classList.remove("hidden");
+    const edit1Div = document.querySelector("#edit1");
+    edit1Div.classList.remove("hidden");
+    const edit2Div = document.querySelector("#edit2");
+    edit2Div.classList.remove("hidden");
+}
+</script>
+</body>
+</html>
