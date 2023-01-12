@@ -17,7 +17,7 @@ function getPoetry(req, res) {
     });
 }
 
-function getPoetry(req, res) {
+function getPoem(req, res) {
     const id = parseInt(req.params.id)
     fs.readFile(aFileName, function (err, data) {
         let poetry = [];
@@ -90,7 +90,7 @@ function deletePoetry(req, res) {
 }
 
 app.get('/api/poetry', (req, res) => getPoetry(req, res));
-app.get('/api/poetry/:id', (req, res) => getPoetry(req, res));
+app.get('/api/poetry/:id', (req, res) => getPoem(req, res));
 app.post('/api/poetry', (req, res) => addPoetry(req, res));
 app.put('/api/poetry/:id', (req, res) => updatePoetry(req, res));
 app.delete('/api/poetry/:id', (req, res) => deletePoetry(req, res));
