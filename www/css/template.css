@@ -173,7 +173,7 @@ footer {grid-area: footer;}
 }
 
 .hidden{
-    display:none;
+    display:none !important;
 }
 .text-center {
     text-align: center;
