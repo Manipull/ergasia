@@ -43,7 +43,7 @@
         }
 
         function updatePoetry() {
-            let bodyData = getFormData();
+            let bodyData = JSON.parse(getFormData());
             let bodyData2 = JSON.parse(bodyData);
             console.log(bodyData);
             console.log(bodyData2.id);
@@ -65,7 +65,7 @@
 
 
         function deletePoetry() {
-            let bodyData = getFormData();
+            let bodyData = JSON.parse(getFormData());
             let bodyData2 = JSON.parse(bodyData);
             fetch("/api/poetry/"+bodyData2.id, {
                 headers: {
