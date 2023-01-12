@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <script type="text/javascript">
+    <script type="module">
         function getPoetry() {
             fetch("/api/poetry", { method: "GET" })
                 .then((res) => res.json())
