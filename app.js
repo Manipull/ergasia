@@ -34,6 +34,6 @@ app.get("/logout.html",(req, res) => {
         res.status(401);
         res.send('Access Forbidden');
     }
-}
+});
 console.log("Server listening at " + port);
 app.listen(port); 
