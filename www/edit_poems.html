@@ -43,7 +43,7 @@
         }
 
         function updatePoetry() {
-            let bodyData = JSON.parse(getFormData());
+            let bodyData = getFormData();
             let bodyData2 = JSON.parse(bodyData);
             console.log(bodyData);
             console.log(bodyData2.id);
@@ -53,7 +53,7 @@
                     'Content-Type': 'application/json'
                 },
                 method: "PUT",
-                body: bodyData
+                body: bodyData2
             })
                 .then((res) => res.json())
                 .then((json) => {
