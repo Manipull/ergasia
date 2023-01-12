@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <title>Edgar Allan Poe</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/template.css">
+</head>
+
+<body>
+    <script src="/js/main.js"></script>
+    <div class="grid">
+        <header><h1 class="text-center"><a href="/">Edgar Allan Poe</a></h1></header>
+        <nav>
+            <ul class="menu">
+                <li><a onclick="showBio();">Βιογραφία</a></li>
+                <li><a onclick="showPhotos();">Φωτογραφίες</a></li>
+                <li><a onclick="showWorks();">Έργα</a></li>
+                <li><a onclick="showLinks();">Σύνδεσμοι</a></li>
+                <li><a onclick="showAdmin();">Διαχείριση</a></li>
+            </ul>
+        </nav>
+        <aside>
+            <div id="bio" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li><a href="bio.html#early_life">Early life</a></li>
+                    <li><a href="bio.html#military">Military career</a></li>
+                    <li><a href="bio.html#publishing">Publishing career</a></li>
+                    <li><a href="bio.html#death">Death</a></li>
+                </ul>
+            </div>
+            <div id="photos" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li><a href="#home">Αρχή 2</a></li>
+                    <li><a href="#about">Σχετικά 2</a></li>
+                    <li><a href="#projects">Εφαρμογές 2</a></li>
+                    <li><a href="#contact">Επικοινωνία 2</a></li>
+                </ul>
+            </div>
+            <div id="works" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li><a href="poems.html">Ποιήματα</a></li>
+                    <li><a href="tales.html">Ιστορίες</a></li>
+                </ul>
+            </div>
+            <div id="links" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li><a href="main_links.html">Links</a></li>
+                </ul>
+            </div>
+            <div id="admin" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li><a href="login_form.html">Login</a></li>
+                </ul>
+            </div>
+        </aside>
+        <main class="padding">
+            <h1>Login Page</h1>
+            <div id="loginText">Use <b>user1</b> for username and <b>password1</b> for password to login </div>
+            <form action="/login" method="POST">
+                <label for="username">Username</label>
+                <input type="text" name="username" />
+                <label for="passsword">Password</label>
+                <input type="password" name="password" id="" />
+                <button type="reset">Reset</button>
+                <button type="submit">Submit</button>
+            </form>
+        </main>
+        <footer class="text-center">All rights Reserved 2023</footer>
+    </div>
+</body>
+</html>
