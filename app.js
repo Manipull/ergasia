@@ -45,7 +45,7 @@ function addPoetry(req, res) {
 }
 
 function updatePoetry(req, res) {
-    const { id, title, date } = req.body
+    const { id, title, date } = req.body;
     const aPoetry = {id:parseInt(id), title, date};
     fs.readFile(aFileName, function (err, data) {
         let poetry = [];
@@ -68,7 +68,7 @@ function updatePoetry(req, res) {
 }
 
 function deletePoetry(req, res) {
-    const id = parseInt(req.body.id)
+    const id = parseInt(req.body.id);
     fs.readFile(aFileName, function (err, data) {
         let poetry = [];
         if (!err) poetry = JSON.parse(data);
