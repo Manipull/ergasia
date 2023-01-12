@@ -3,6 +3,10 @@
     padding: 0;
 }
 @media (min-width: 1200px) {
+    .sideDiv {
+        position: sticky;
+        top:10px;
+    }
     .grid{
         height:100vh;
         display: grid;
@@ -77,6 +81,10 @@
 
 
 @media  (min-width: 768px) and (max-width: 1199.98px) {
+    .sideDiv {
+        position: sticky;
+        top:10px;
+    }
     .grid{
         height:100vh;
         display: grid;
