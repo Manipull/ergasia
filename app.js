@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 let aFileName = __dirname + '/www/data/poetry.json';
-
+console.log(aFileName);
 function getPoetry(req, res) {
     fs.readFile(aFileName, function (err, data) {
         let poetry = [];
@@ -27,8 +27,8 @@ function getPoetry(req, res) {
 }
 
 function addPoetry(req, res) {
-    const { id, date} = req.body;
-    const newPoetry = {id:parseInt(id), date};
+    const { id, title, date} = req.body;
+    const newPoetry = {id:parseInt(id), title, date};
     fs.readFile(aFileName, function (err, data) {
         let poetry = [];
         if (!err) poetry = JSON.parse(data);
@@ -45,8 +45,8 @@ function addPoetry(req, res) {
 }
 
 function updatePoetry(req, res) {
-    const { id, date } = req.body
-    const aPoetry = {id:parseInt(id), date};
+    const { id, title, date } = req.body
+    const aPoetry = {id:parseInt(id), title, date};
     fs.readFile(aFileName, function (err, data) {
         let poetry = [];
         if (!err) poetry = JSON.parse(data);
