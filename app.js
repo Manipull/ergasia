@@ -29,6 +29,11 @@ const isAuthenticated = (req, res, next) => {
     }    
     next();
 }
-app.use("/logout.html",isAuthenticated,express.static(__dirname + '/logout.html'));
+app.get("/logout.html",(req, res) => {
+    if (!req.cookies.username){
+        res.status(401);
+        res.send('Access Forbidden');
+    }
+}
 console.log("Server listening at " + port);
 app.listen(port); 
