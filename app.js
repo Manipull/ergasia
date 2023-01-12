@@ -14,13 +14,13 @@ app.post('/login', (req, res) => {
     //check if the passwords are equal
     if (password && password === req.body.password) {
         res.cookie('username', username);
-        res.redirect("/admin");
+        res.redirect("/logout.html");
     }
     res.send('Failed to login!')
 })
 app.get('/logout', (req, res) => {
     res.clearCookie('username');
-    res.redirect('/admin')
+    res.redirect('/')
 });
 const isAuthenticated = (req, res, next) => {
     if (!req.cookies.username){
@@ -29,6 +29,6 @@ const isAuthenticated = (req, res, next) => {
     }    
     next();
 }
-app.use("/admin",isAuthenticated,express.static(__dirname + '/admin'));
+app.use("/logout.html",isAuthenticated,express.static(__dirname + '/logout.html'));
 console.log("Server listening at " + port);
 app.listen(port); 
