@@ -29,6 +29,6 @@ const isAuthenticated = (req, res, next) => {
     }    
     next();
 }
-app.use("/admin/:page",isAuthenticated,express.static(__dirname + '/admin'));
+app.use("/admin/logout",isAuthenticated,express.static(__dirname + '/admin/logout.html'));
 console.log("Server listening at " + port);
 app.listen(port); 
