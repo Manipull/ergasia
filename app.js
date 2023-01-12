@@ -95,7 +95,7 @@ app.post('/api/poetry', (req, res) => addPoetry(req, res));
 app.put('/api/poetry/:id', (req, res) => updatePoetry(req, res));
 app.delete('/api/poetry/:id', (req, res) => deletePoetry(req, res));
 
-let bFileName = __dirname + '/www/data/tales.json';
+/*let bFileName = __dirname + '/www/data/tales.json';
 function getTales(req, res) {
     fs.readFile(bFileName, function (err, data) {
         let tales = [];
@@ -180,7 +180,7 @@ app.get('/api/tales', (req, res) => getTales(req, res));
 app.get('/api/tales/:id', (req, res) => getTale(req, res));
 app.post('/api/tales', (req, res) => addTales(req, res));
 app.put('/api/tales/:id', (req, res) => updateTales(req, res));
-app.delete('/api/tales/:id', (req, res) => deleteTales(req, res));
+app.delete('/api/tales/:id', (req, res) => deleteTales(req, res));*/
 
 app.use(express.static(__dirname + '/www'));
 const users = {'user1': 'password1','user2': 'password2'};

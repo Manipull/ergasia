@@ -44,10 +44,7 @@
 
         function updatePoetry() {
             let bodyData = getFormData();
-            let bodyData2 = JSON.parse(bodyData);
-            console.log(bodyData);
-            console.log(bodyData2.id);
-            fetch("/api/poetry/"+bodyData2.id, {
+            fetch("/api/poetry/"+bodyData.id, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -65,8 +62,7 @@
 
 
         function deletePoetry() {
-            let bodyData = JSON.parse(getFormData());
-            let bodyData2 = JSON.parse(bodyData);
+            let bodyData = getFormData();
             fetch("/api/poetry/"+bodyData2.id, {
                 headers: {
                     'Accept': 'application/json',
