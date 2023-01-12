@@ -176,7 +176,7 @@ footer {grid-area: footer;}
     display:none !important;
 }
 .text-center {
-    text-align: center;
+    text-align: center !important;
 }
 
 .padding {
