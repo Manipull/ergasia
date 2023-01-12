@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <title>Edgar Allan Poe - Έργα - Ποιήματα</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/template.css">
+</head>
+
+<body>
+    <script type="module">
+        function getTales() {
+            fetch("/api/tales", { method: "GET" })
+                .then((res) => res.json())
+                .then((json) => showTales((json)))
+                .catch((err) => console.error("error:", err));
+        }
+        function getFormData() {
+            let aTales = {
+                id: document.querySelector("#talesForm [name='id']").value,
+                title: document.querySelector("#talesForm [name='title']").value,
+                date: document.querySelector("#talesForm [name='date']").value,
+            };
+            return JSON.stringify(aTales);
+        }
+        function addTales() {
+            let bodyData = getFormData();
+            fetch("/api/tales", {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: bodyData
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    alert(json);
+                    getTales();
+                })
+                .catch((err) => alert("error:", err));
+        }
+
+        function updateTales() {
+            let bodyData = getFormData();
+            fetch("/api/tales/"+bodyData.id, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "PUT",
+                body: bodyData
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    alert(json);
+                    getTales();
+                })
+                .catch((err) => alert("error:", err));
+        }
+
+
+        function deleteTales() {
+            let bodyData = getFormData();
+            fetch("/api/tales/"+bodyData.id, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "DELETE",
+                body: bodyData
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    alert(json);
+                    getTales();
+                })
+                .catch((err) => alert("error:", err));
+        }
+
+        function selectTales(event) {
+            if (!event.target.outerHTML.startsWith("<td>")) return;
+            let aRow = event.target.parentNode;
+            let inputs=document.querySelectorAll("#talesForm input");
+            for (let i=0; i < inputs.length; i++){
+                inputs[i].value = aRow.children[i].innerText;
+            } 
+            let rows = [...aRow.parentNode.children];
+            rows.forEach((r => r.classList.remove("selected")));
+            aRow.classList.add("selected");            
+        }
+        function showTales(tales) {
+            let anHTML = `<table><tr><th>ID</th>
+                <th>Title</th><th>Date</th></tr>`
+            for (let aTales of tales) {
+                anHTML += `<tr>
+                    <td>${aTales.id}</td>
+                    <td>${aTales.title}</td>
+                    <td>${aTales.date}</td>
+                    </tr>`;
+            }
+            anHTML += "</table>";
+            document.getElementById("talesTable").innerHTML = anHTML;
+        }
+        getTales();
+        document.getElementById("talesTable").addEventListener("click", selectTales);
+        document.getElementById("ButtonGetTales").addEventListener("click", getTales);
+        document.getElementById("ButtonAddTales").addEventListener("click", addTales);
+        document.getElementById("ButtonUpdateTales").addEventListener("click", updateTales);
+        document.getElementById("ButtonDeleteTales").addEventListener("click", deleteTales);
+    </script>
+    <script src="/js/main.js"></script>
+    <div class="grid">
+        <header><h1 class="text-center"><a href="/">Edgar Allan Poe</a></h1></header>
+        <nav>
+            <ul class="menu">
+                <li><a onclick="showBio();">Βιογραφία</a></li>
+                <li><a onclick="showPhotos();">Φωτογραφίες</a></li>
+                <li><a onclick="showWorks();">Έργα</a></li>
+                <li><a onclick="showLinks();">Σύνδεσμοι</a></li>
+                <li><a onclick="showAdmin();">Διαχείριση</a></li>
+            </ul>
+        </nav>
+        <aside>
+            <div id="bio" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li><a href="bio.html#early_life">Early life</a></li>
+                    <li><a href="bio.html#military">Military career</a></li>
+                    <li><a href="bio.html#publishing">Publishing career</a></li>
+                    <li><a href="bio.html#death">Death</a></li>
+                </ul>
+            </div>
+            <div id="photos" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li><a href="#home">Αρχή 2</a></li>
+                    <li><a href="#about">Σχετικά 2</a></li>
+                    <li><a href="#projects">Εφαρμογές 2</a></li>
+                    <li><a href="#contact">Επικοινωνία 2</a></li>
+                </ul>
+            </div>
+            <div id="works" class="sideDiv">
+                 <ul class="sidemenu">
+                    <li><a href="poems.html">Ποιήματα</a></li>
+                    <li><a href="tales.html">Ιστορίες</a></li>
+                </ul>
+            </div>
+            <div id="links" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li><a href="main_links.html">Links</a></li>
+                </ul>
+            </div>
+            <div id="admin" class="sideDiv hidden">
+                 <ul class="sidemenu">
+                    <li class="" id="login"><a href="login_form.html">Login</a></li>
+                    <li class="hidden" id="logout"><a href="login_form.html">Logout</a></li>
+                    <li class="hidden" id="edit1"><a href="edit_poetry.html">Edit 1</a></li>
+                    <li class="hidden" id="edit2"><a href="edit_tales.html">Edit 2</a></li>
+                </ul>
+            </div>
+        </aside>
+        <main class="padding">
+            <h1>Tales Form</h1>
+            <div id="talesTable"></div>
+            <div id="talesForm">
+                <label for="id">Id</label>
+                <input name="id" type="number" />
+                <label for="title">Title</label>
+                <input name="title" type="text" />
+                <label for="date">Date</label>
+                <input name="date" type="text" />
+            </div>
+            <div id="toolbar">
+                <button id="ButtonGetTales">Get Tales</button>
+                <button id="ButtonAddTales">Add Tales</button>
+                <button id="ButtonUpdateTales">Update Tales</button>
+                <button id="ButtonDeleteTales">Delete Tales</button>
+            </div>
+        </main>
+        <footer class="text-center">All rights Reserved 2023</footer>
+    </div>
+<script type="text/javascript">
+var myCookie = getCookie("username");
+if (myCookie != null) {
+    const loginDiv = document.querySelector("#login");
+    loginDiv.classList.add("hidden");
+    const logoutDiv = document.querySelector("#logout");
+    logoutDiv.classList.remove("hidden");
+    const edit1Div = document.querySelector("#edit1");
+    edit1Div.classList.remove("hidden");
+    const edit2Div = document.querySelector("#edit2");
+    edit2Div.classList.remove("hidden");
+}
+</script>
+</body>
+</html>

@@ -95,6 +95,93 @@ app.post('/api/poetry', (req, res) => addPoetry(req, res));
 app.put('/api/poetry/:id', (req, res) => updatePoetry(req, res));
 app.delete('/api/poetry/:id', (req, res) => deletePoetry(req, res));
 
+let bFileName = __dirname + '/www/data/tales.json';
+function getTales(req, res) {
+    fs.readFile(bFileName, function (err, data) {
+        let tales = [];
+        if (!err) tales = JSON.parse(data);
+        res.status(200).json(tales);
+    });
+}
+
+function getTale(req, res) {
+    const id = parseInt(req.params.id)
+    fs.readFile(bFileName, function (err, data) {
+        let tales = [];
+        if (!err) tales = JSON.parse(data);
+        res.status(200).json(tales.filter(p => p.id === id));
+    });
+}
+
+function addTales(req, res) {
+    const { id, title, date} = req.body;
+    const newTales = {id:parseInt(id), title, date};
+    fs.readFile(bFileName, function (err, data) {
+        let tales = [];
+        if (!err) tales = JSON.parse(data);
+        tales.push(newTales);
+        fs.writeFile(bFileName,JSON.stringify(tales),function(err){
+                if (err){
+                    res.status(200).json(`Error adding id: ${id}`);
+                }
+                else{
+                    res.status(200).json(`Tales added with id: ${id}`);
+                }
+            });
+    });
+}
+
+function updateTales(req, res) {
+    const { id, title, date } = req.body
+    const aTales = {id:parseInt(id), title, date};
+    fs.readFile(bFileName, function (err, data) {
+        let tales = [];
+        if (!err) tales = JSON.parse(data);
+        const anIndex = tales.findIndex(p=>p.id===aTales.id);
+        if (anIndex < 0 ) {
+            res.status(200).json(`Cannot find id: ${id}`);
+            return;
+        }
+        tales[anIndex] = aTales;
+        fs.writeFile(bFileName,JSON.stringify(tales),function(err){
+                if (err){
+                    res.status(200).json(`Error updating id: ${id}`);
+                }
+                else{
+                    res.status(200).json(`Updated id: ${id}`);
+                }
+            });
+    });
+}
+
+function deleteTales(req, res) {
+    const id = parseInt(req.body.id)
+    fs.readFile(bFileName, function (err, data) {
+        let tales = [];
+        if (!err) tales = JSON.parse(data);
+        const anIndex = tales.findIndex(p=>p.id===id);
+        if (anIndex < 0 ) {
+            res.status(200).json(`Cannot find id: ${id}`);
+            return;
+        }
+        tales.splice(anIndex, 1)
+        fs.writeFile(bFileName,JSON.stringify(tales),function(err){
+                if (err){
+                    res.status(200).json(`Error deleting id: ${id}`);
+                }
+                else{
+                    res.status(200).json(`Deleted id: ${id}`);
+                }
+            });
+    });
+}
+
+app.get('/api/tales', (req, res) => getTales(req, res));
+app.get('/api/tales/:id', (req, res) => getTale(req, res));
+app.post('/api/tales', (req, res) => addTales(req, res));
+app.put('/api/tales/:id', (req, res) => updateTales(req, res));
+app.delete('/api/tales/:id', (req, res) => deleteTales(req, res));
+
 app.use(express.static(__dirname + '/www'));
 const users = {'user1': 'password1','user2': 'password2'};
 app.post('/login', (req, res) => {
