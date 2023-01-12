@@ -44,6 +44,8 @@
 
         function updatePoetry() {
             let bodyData = getFormData();
+            console.log(bodyData);
+            console.log(bodyData.id);
             fetch("/api/poetry/"+bodyData.id, {
                 headers: {
                     'Accept': 'application/json',
