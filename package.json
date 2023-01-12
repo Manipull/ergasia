@@ -1,7 +1,7 @@
 {
-  "name": "express_cookiesAuth",
+  "name": "ergasia",
   "version": "1.0.0",
-  "description": "nodejs express_cookiesAuth",
+  "description": "nodejs ergasia",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -9,18 +9,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uthcst/express_cookiesAuth.git"
+    "url": "git+https://github.com/Manipull/ergasia.git"
   },
   "keywords": [
     "nodejs",
     "hello"
   ],
-  "author": "uthcst",
+  "author": "Manipull",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/uthcst/express_cookiesAuth/issues"
+    "url": "https://github.com/Manipull/ergasia/issues"
   },
-  "homepage": "https://github.com/uthcst/express_cookiesAuth#readme",
+  "homepage": "https://github.com/Manipull/ergasia#readme",
   "dependencies": {
     "body-parser": "^1.20.1",
     "cookie-parser": "^1.4.6",
