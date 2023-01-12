@@ -14,7 +14,7 @@ app.post('/login', (req, res) => {
     //check if the passwords are equal
     if (password && password === req.body.password) {
         res.cookie('username', username);
-        res.redirect("/logout.html");
+        res.redirect("/admin/logout.html");
     }
     res.send('Failed to login!')
 })
@@ -29,12 +29,6 @@ const isAuthenticated = (req, res, next) => {
     }    
     next();
 }
-app.get("/logout.html",(req, res) => {
-    console.log(res);
-    if (!req.cookies.username){
-        res.status(401);
-        res.send('Access Forbidden');
-    }
-});
+app.use("/admin",isAuthenticated,express.static(__dirname + '/admin'));
 console.log("Server listening at " + port);
 app.listen(port); 
