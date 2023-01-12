@@ -18,6 +18,7 @@
         }
         function getFormData() {
             let aPoetry = {
+                id: document.querySelector("#poetryForm [name='id']").value,
                 title: document.querySelector("#poetryForm [name='title']").value,
                 date: document.querySelector("#poetryForm [name='date']").value,
             };
@@ -43,7 +44,7 @@
 
         function updatePoetry() {
             let bodyData = getFormData();
-            fetch("/api/poetry/"+bodyData.title, {
+            fetch("/api/poetry/"+bodyData.id, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -62,7 +63,7 @@
 
         function deletePoetry() {
             let bodyData = getFormData();
-            fetch("/api/poetry/"+bodyData.title, {
+            fetch("/api/poetry/"+bodyData.id, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -90,10 +91,11 @@
             aRow.classList.add("selected");            
         }
         function showPoetry(poetry) {
-            let anHTML = `<table><tr>
+            let anHTML = `<table><tr><th>ID</th>
                 <th>Title</th><th>Date</th></tr>`
             for (let aPoetry of poetry) {
                 anHTML += `<tr>
+                    <td>${aPoetry.id}</td>
                     <td>${aPoetry.title}</td>
                     <td>${aPoetry.date}</td>
                     </tr>`;
@@ -161,6 +163,8 @@
             <h1>Poetry Form</h1>
             <div id="poetryTable"></div>
             <div id="poetryForm">
+                <label for="id">Id</label>
+                <input name="id" type="number" />
                 <label for="title">Title</label>
                 <input name="title" type="text" />
                 <label for="date">Date</label>

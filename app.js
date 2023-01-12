@@ -18,82 +18,82 @@ function getPoetry(req, res) {
 }
 
 function getPoetry(req, res) {
-    const title = parseInt(req.params.title)
+    const id = parseInt(req.params.id)
     fs.readFile(aFileName, function (err, data) {
         let poetry = [];
         if (!err) poetry = JSON.parse(data);
-        res.status(200).json(poetry.filter(p => p.title === title));
+        res.status(200).json(poetry.filter(p => p.id === id));
     });
 }
 
 function addPoetry(req, res) {
-    const { title, date} = req.body;
-    const newPoetry = {title:title, date};
+    const { id, date} = req.body;
+    const newPoetry = {id:parseInt(id), date};
     fs.readFile(aFileName, function (err, data) {
         let poetry = [];
         if (!err) poetry = JSON.parse(data);
         poetry.push(newPoetry);
         fs.writeFile(aFileName,JSON.stringify(poetry),function(err){
                 if (err){
-                    res.status(200).json(`Error adding title: ${title}`);
+                    res.status(200).json(`Error adding id: ${id}`);
                 }
                 else{
-                    res.status(200).json(`Poetry added with title: ${title}`);
+                    res.status(200).json(`Poetry added with id: ${id}`);
                 }
             });
     });
 }
 
 function updatePoetry(req, res) {
-    const { title, date } = req.body
-    const aPoetry = {title:title, date};
+    const { id, date } = req.body
+    const aPoetry = {id:parseInt(id), date};
     fs.readFile(aFileName, function (err, data) {
         let poetry = [];
         if (!err) poetry = JSON.parse(data);
-        const anIndex = poetry.findIndex(p=>p.title===aPoetry.title);
+        const anIndex = poetry.findIndex(p=>p.id===aPoetry.id);
         if (anIndex < 0 ) {
-            res.status(200).json(`Cannot find title: ${title}`);
+            res.status(200).json(`Cannot find id: ${id}`);
             return;
         }
         poetry[anIndex] = aPoetry;
         fs.writeFile(aFileName,JSON.stringify(poetry),function(err){
                 if (err){
-                    res.status(200).json(`Error updating title: ${title}`);
+                    res.status(200).json(`Error updating id: ${id}`);
                 }
                 else{
-                    res.status(200).json(`Updated title: ${title}`);
+                    res.status(200).json(`Updated id: ${id}`);
                 }
             });
     });
 }
 
 function deletePoetry(req, res) {
-    const title = parseInt(req.body.title)
+    const id = parseInt(req.body.id)
     fs.readFile(aFileName, function (err, data) {
         let poetry = [];
         if (!err) poetry = JSON.parse(data);
-        const anIndex = poetry.findIndex(p=>p.title===title);
+        const anIndex = poetry.findIndex(p=>p.id===id);
         if (anIndex < 0 ) {
-            res.status(200).json(`Cannot find title: ${title}`);
+            res.status(200).json(`Cannot find id: ${id}`);
             return;
         }
         poetry.splice(anIndex, 1)
         fs.writeFile(aFileName,JSON.stringify(poetry),function(err){
                 if (err){
-                    res.status(200).json(`Error deleting title: ${title}`);
+                    res.status(200).json(`Error deleting id: ${id}`);
                 }
                 else{
-                    res.status(200).json(`Deleted title: ${title}`);
+                    res.status(200).json(`Deleted id: ${id}`);
                 }
             });
     });
 }
 
 app.get('/api/poetry', (req, res) => getPoetry(req, res));
-app.get('/api/poetry/:title', (req, res) => getPoetry(req, res));
+app.get('/api/poetry/:id', (req, res) => getPoetry(req, res));
 app.post('/api/poetry', (req, res) => addPoetry(req, res));
-app.put('/api/poetry/:title', (req, res) => updatePoetry(req, res));
-app.delete('/api/poetry/:title', (req, res) => deletePoetry(req, res));
+app.put('/api/poetry/:id', (req, res) => updatePoetry(req, res));
+app.delete('/api/poetry/:id', (req, res) => deletePoetry(req, res));
 
 app.use(express.static(__dirname + '/www'));
 const users = {'user1': 'password1','user2': 'password2'};
