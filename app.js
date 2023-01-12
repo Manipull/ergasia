@@ -14,7 +14,7 @@ app.post('/login', (req, res) => {
     //check if the passwords are equal
     if (password && password === req.body.password) {
         res.cookie('username', username);
-        res.redirect("/admin/logout.html");
+        res.redirect("/logout.html");
     }
     res.send('Failed to login!')
 })
@@ -29,6 +29,5 @@ const isAuthenticated = (req, res, next) => {
     }    
     next();
 }
-app.use("/admin/logout",isAuthenticated,express.static(__dirname + '/admin/logout.html'));
 console.log("Server listening at " + port);
 app.listen(port); 
