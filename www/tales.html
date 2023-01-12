@@ -51,7 +51,10 @@
             </div>
             <div id="admin" class="sideDiv hidden">
                  <ul class="sidemenu">
-                    <li><a href="login_form.html">Login</a></li>
+                    <li class="" id="login"><a href="login_form.html">Login</a></li>
+                    <li class="hidden" id="logout"><a href="login_form.html">Logout</a></li>
+                    <li class="hidden" id="edit1"><a href="login_form.html">Edit 1</a></li>
+                    <li class="hidden" id="edit2"><a href="login_form.html">Edit 2</a></li>
                 </ul>
             </div>
         </aside>
@@ -63,5 +66,18 @@
     <script type="text/javascript">
         getJSONDataWorks("tales.json","tales_div");
     </script>
+<script type="text/javascript">
+var myCookie = getCookie("username");
+if (myCookie != null) {
+    const loginDiv = document.querySelector("#login");
+    loginDiv.classList.add("hidden");
+    const logoutDiv = document.querySelector("#logout");
+    logoutDiv.classList.remove("hidden");
+    const edit1Div = document.querySelector("#edit1");
+    edit1Div.classList.remove("hidden");
+    const edit2Div = document.querySelector("#edit2");
+    edit2Div.classList.remove("hidden");
+}
+</script>
 </body>
 </html>
