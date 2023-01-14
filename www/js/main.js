@@ -51,6 +51,23 @@ function showJSONDataLinks(links) {
 	}
 	anHTML += "</table>";
 	document.getElementById("links_div").innerHTML = anHTML;
+
+function getJSONDataLinks2(){
+	fetch("./data/links2.json", { method: "GET"})
+	.then((res) => res.json())
+	.then((json) => showJSONDataLinks2((json)))
+	.catch((err) => console.error("error:",err));
+}
+function showJSONDataLinks2(links) {
+	let anHTML = "<table><tr><th>ID</th><th>Link</th></tr>";
+	for (let aLink of links) {
+		anHTML += "<tr><td>" +
+		 aLink.id + "</td><td><a href='" +
+		 aLink.url + "' target='_blank'>" +
+		 aLink.title + "</a></td></tr>";
+	}
+	anHTML += "</table>";
+	document.getElementById("links2_div").innerHTML = anHTML;
 }
 
 function getJSONDataWorks(json_file,result_div){
