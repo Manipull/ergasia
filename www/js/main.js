@@ -51,6 +51,7 @@ function showJSONDataLinks(links) {
 	}
 	anHTML += "</table>";
 	document.getElementById("links_div").innerHTML = anHTML;
+}
 
 function getJSONDataLinks2(){
 	fetch("./data/links2.json", { method: "GET"})
