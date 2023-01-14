@@ -184,7 +184,7 @@ app.put('/api/tales/:id', (req, res) => updateTales(req, res));
 app.delete('/api/tales/:id', (req, res) => deleteTales(req, res));
 
 app.use(express.static(__dirname + '/www'));
-const users = {'user1': 'password1','user2': 'password2'};
+const users = {'manipull': 'Manipull#1234'};
 app.post('/login', (req, res) => {
     // get username from the client form data
     const username = req.body.username;
