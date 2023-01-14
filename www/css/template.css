@@ -252,7 +252,6 @@ th, td {
 
 .flex > li {
     height: 400px;
-    cursor: pointer;
     position: relative;
 }
 
